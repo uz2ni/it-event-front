@@ -5,7 +5,7 @@ import online from '../components/online.vue';
 import free from '../components/free.vue';
 import magam from '../components/magam.vue';
 import mogakco from '../components/mogakco.vue';
-import enroll from '../components/form.vue';
+import enroll from '../views/form/form.vue';
 Vue.use(VueRouter);
 
 export const router = new VueRouter({

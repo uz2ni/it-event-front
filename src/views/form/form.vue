@@ -29,11 +29,15 @@
         </tr>
         <tr>
           <td>행사시작일</td>
-          <td></td>
+          <td>
+            <datepicker :disabled-dates="disabledDates" :language="ko" :format="customFormatter" :value="date1" v-model="date1"></datepicker>
+          </td>
         </tr>
         <tr>
           <td>행사종료일</td>
-          <td></td>
+          <td>
+            <datepicker :disabled-dates="disabledDates" :language="ko" :format="customFormatter" :value="date1" v-model="date1"></datepicker>
+          </td>
         </tr>
         <tr>
           <td>장소</td>
@@ -61,8 +65,23 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import formVar from './form.js';
 export default {
-
+  mixins: [formVar],
+  components:{
+    Datepicker,
+    FontAwesomeIcon,
+  },
+  mounted() { //업종 mounted와 updated안하면 dom에서 bootstrap-select로 바인딩이 안됨
+    const $selectpicker = $(this.$el).find('.selectpicker');
+    $selectpicker.selectpicker();
+  },
+  updated() {
+    $(this.$el).find('.selectpicker').selectpicker('refresh');
+    $(this.$refs.upjongcode).selectpicker('refresh');
+  },
 }
 </script>
 
