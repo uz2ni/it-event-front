@@ -9,6 +9,8 @@
       <router-link tag="li" to="free"><li>무료</li></router-link>
       <router-link tag="li" to="magam"><li>곧!마감</li></router-link>
       <router-link tag="li" to="mogakco"><li>모각코</li></router-link>
+      <router-link tag="li" to="enroll" class="enrollBtn"><span >이벤트 등록하기</span></router-link>
+      <router-link tag="li" to="login"><li>로그인</li></router-link>
     </div>
   </div>
 </template>
@@ -27,6 +29,9 @@ export default {
 </script>
 
 <style scoped>
+*:focus{
+  outline:none;
+}
 .nav{
   width:100%;
   margin:0px auto;
@@ -36,6 +41,10 @@ export default {
   color:#fff;
   background-color:#000000;
   border-bottom:1px solid #575757;
+}
+#app > div.nav > div.headerRight > li.enrollBtn{
+  width:150px;
+  text-align:right;
 }
 .headerLeft{
   color: fff;
@@ -64,7 +73,6 @@ export default {
   color: fff;
   float:right;
   padding: 5px 20px 0 20px;
-  
 }
 .headerRight .router-link-exact-active{
   color: #40E0D0;
@@ -93,5 +101,42 @@ a:link{
 }
 a:visited{
   color:#fff;
+}
+.enrollBtn {
+	background-image: linear-gradient(to right, #006175 0%, #00a950 100%);
+	border-radius: 40px;
+  box-sizing: border-box;
+	color: #ffffff;
+	display: block;
+	height: 30px;
+	letter-spacing: 1px;
+	margin: -3px auto 0 auto;
+	padding: 4px;
+	position: relative;
+  text-decoration: none;
+	text-transform: uppercase;
+	z-index: 2;
+  margin-left:30px;
+}
+
+.enrollBtn:hover {
+	color: #fff;
+}
+
+.enrollBtn span {
+	align-items: center;
+	background: #000000;
+	border-radius: 40px;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	transition: background .5s ease;
+	width: 100%;
+  font-weight: normal;
+}
+
+.enrollBtn:hover span {
+	background: transparent;
+  color:#ffffff;
 }
 </style>
