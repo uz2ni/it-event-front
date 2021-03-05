@@ -17,7 +17,7 @@ const customLabels = {
   previous: '<',
   next: '>'
 };
-var konggoVar = { 
+var formVar = { 
   data: function () { 
     return { 
       disabledDates: {
@@ -29,28 +29,12 @@ var konggoVar = {
           }
         }
       },
+      date1 : new Date(new Date().getFullYear(), new Date().getMonth(),  new Date().getDate()),
+      date2 : new Date(new Date().getFullYear(), new Date().getMonth(),  new Date().getDate()),
       ko:ko,
-      isShowing : true, switch1: true,
-      isNavOpen: false,  
-      currentpage : 1, 
-      tri : -1,tdname : '', 
-      exampleItems:[], 
-      customLabels, 
       loading:false, 
       color:'#008844', 
-      fontSize: this.$store.state.fontSize,
-      gwanliOpen:false,
       gicho:true,  ss:0, gwanliIndex:0, faQuestionCircle, faEdit, faChevronDown, faChevronUp ,faAngleDoubleDown,faAngleDoubleUp,faPrint,faChartBar,faFileExcel,faTrashAlt,
-      loading1:true, loading2: true, konggono:'', kongsaname:'',fileContent:'',
-      radio : 'jasasub1',
-      faSearch,faCog,
-      aa11s:[],aa12s:[],aa15s:[],aa17s:[],aa21s:[],aa22s:[],aa23s:[],aa24s:[],aa99s:[],aa100s:[], stop:[{"code":"","value":""}],
-      bb11s:[],bb12s:[],bb15s:[],bb17s:[],bb21s:[],bb22s:[],bb23s:[],bb24s:[],bb99s:[],multiupjongs:[],multijiyuks:[],
-      jasaupjong:[], gugunArr:[],
-      upjongall:[],
-      optionSelect:'',
-      conditionsAll:'',
-      svcselect:'1'
     } 
   },
   computed:{
@@ -64,4 +48,4 @@ var konggoVar = {
     },
   }
 }
-export default konggoVar;
+export default formVar;

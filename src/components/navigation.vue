@@ -109,8 +109,7 @@ a:visited{
 	color: #ffffff;
 	display: block;
 	height: 30px;
-	letter-spacing: 1px;
-	margin: -3px auto 0 auto;
+	margin: -4px auto 0 auto;
 	padding: 4px;
 	position: relative;
   text-decoration: none;
