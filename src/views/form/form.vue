@@ -9,43 +9,64 @@
           <td><input type="text" name="cf_name" id="cf_name"></td>
         </tr>
         <tr>
+          <th>행사종류</th>
+          <td>
+            <select name="cf_cate" id="cf_cate" class="selectpicker selectDropDown show-tick">
+              <option value="seminar">컨퍼런스(세미나)</option>
+              <option value="class">클래스</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>온오프라인</th>
+          <td>
+            <input type="radio" name="cf_onlineYN" id="cf_onlineYN" value="online" v-model="cf_onlineYN">
+            <label for="online"><span></span>온라인</label>&nbsp;
+            <input type="radio" name="cf_onlineYN" id="cf_onlineYN" value="offline" v-model="cf_onlineYN">
+            <label for="online"><span></span>오프라인</label>
+          </td>
+        </tr>
+        <tr>
           <th>호스트명</th>
           <td><input type="text" name="cf_host" id="cf_host"></td>
         </tr>
         <tr>
           <th>호스트 전화번호</th>
           <td>
-            <input type="text" name="cf_hp1" id="cf_hp1">-
-            <input type="text" name="cf_hp2" id="cf_hp2">-
-            <input type="text" name="cf_hp3" id="cf_hp3">
+            <input type="text" name="hs_hp1" id="hs_hp1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> -
+            <input type="text" name="hs_hp2" id="hs_hp2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> -
+            <input type="text" name="hs_hp3" id="hs_hp3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
           </td>
         </tr>
         <tr>
           <th>호스트 이메일</th>
           <td>
-            <input type="text" name="cf_email1" id="cf_email1">@
-            <input type="text" name="cf_email2" id="cf_email2">
+            <input type="text" name="hs_email1" id="hs_email1">@
+            <input type="text" name="hs_email2" id="hs_email2">
           </td>
         </tr>
         <tr>
           <th>행사시작일</th>
           <td>
-            <datepicker :disabled-dates="disabledDates" :language="ko" :format="customFormatter" :value="date1" v-model="date1"></datepicker>
+            <datepicker :disabled-dates="disabledDates" :language="ko" :format="customFormatter" class="date" :value="date1" v-model="date1"></datepicker>
           </td>
         </tr>
         <tr>
           <th>행사종료일</th>
           <td>
-            <datepicker :disabled-dates="disabledDates" :language="ko" :format="customFormatter" :value="date1" v-model="date1"></datepicker>
+            <datepicker :disabled-dates="disabledDates" :language="ko" :format="customFormatter" class="date" :value="date2" v-model="date2"></datepicker>
           </td>
         </tr>
         <tr>
           <th>장소</th>
-          <td><input type="text" name="" id=""></td>
+          <td><input type="text" name="loca" id="loca"></td>
+        </tr>
+        <tr>
+          <td>장소 api들어갈곳</td>
         </tr>
         <tr>
           <th>참여인원</th>
-          <td><input type="text" name="" id=""></td>
+          <td><input type="text" name="pplNum" id="pplNum"></td>
         </tr>
         <tr>
           <th>대표이미지 등록</th>
@@ -53,14 +74,16 @@
         </tr>
         <tr>
           <th>행사내용</th>
-          <td><textarea name="Text1" cols="40" rows="5"></textarea></td>
+          <td><textarea name="cf_content" cols="40" rows="5"></textarea></td>
         </tr>
       </table>
+      <button type="button" class="submitBtn" @click="checkform()">등록하기</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 var moment = require('moment');
 moment().format();
 import $ from 'jquery'
@@ -70,7 +93,7 @@ import bootstrapselect from '../../lib/bootstrap-select.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import formVar from './form.js';
 export default {
-  name:'endrollForm',
+  name:'enrollForm',
   mixins: [formVar],
   components:{
     Datepicker,
@@ -82,27 +105,67 @@ export default {
   },
   updated() {
     $(this.$el).find('.selectpicker').selectpicker('refresh');
-    $(this.$refs.upjongcode).selectpicker('refresh');
   },
   methods:{
     customFormatter(date) {   //datepicker 기본포맷
       return moment(date).format('YYYY/MM/DD');
     },
+    async checkform(){
+      const res = await axios.get('https://it-event-back.herokuapp.com/events',
+        {
+          "hostEmail":this.hs_email1+"@"+this.hs_email2,
+          "hostPhone":this.hs_hp1+this.hs_hp2+this.hs_hp3,
+          "title":this.cf_name,
+          "eventStartDate":this.date1,
+          "eventLastDate":this.date2,
+          "eventConceptType":this.cf_cate,
+          "location":this.loca,
+          "detailLocation":this.loca,
+          "image":this.thumbnail,
+          "contents":this.cf_content,
+          "online":this.cf_onlineYN
+        }
+      )
+      console.log(res);
+    }
   }
 }
 </script>
 
 <style scoped>
+*:focus{
+  outline:none;
+}
+.date{
+  width:210px;
+  border-bottom:1px solid #006175;
+  font-size:1.5vw;
+  cursor: pointer;
+}
+input[type="text"]{
+  border-bottom:1px solid #006175;
+}
+textarea{
+  border:1px solid #006175;
+}
 .enrollForm{
   padding:100px;
   height:100%;
+  width:900px;
 }
 .tableClass{
-  width:100%;
+  margin-top:90px;
+  width:85%;
+  margin:0 auto;
+  table-layout: fixed;
 }
-.tableClass th,td{
+.tableClass th{
+  width:150px;
+  text-align: left;
+  height:40px;
+}
+.tableClass tr td{
   text-align:left;
-  height: 30px;
 }
 .title{
   font-size:2.2vw;
@@ -112,7 +175,83 @@ export default {
   font-size:1.8vw;
   margin-bottom:30px;
 }
+.submitBtn{
+  border:none;
+  border-radius: 25px;
+  height:32px;
+  width:150px;
+  margin:0 auto;
+  padding:0 10px;
+  margin-top:50px;
+  color:#ffffff;
+  background-color: #08AEEA;
+  background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+}
+select[name="cf_cate"]{
+  width:210px;
+}
+input[name="hs_hp1"],
+input[name="hs_hp2"],
+input[name="hs_hp3"]{
+  width: 50px;
+}
+input[name="hs_email1"]{
+  width:119px;
+}
 input[readonly]{
   width:206px;
+}
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+    top:2px;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #006175;
+    border-radius: 100%;
+    background: #fff;
+  
+  border: 1px #919191 solid;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #006175;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
 }
 </style>

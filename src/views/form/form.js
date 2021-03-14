@@ -32,6 +32,7 @@ var formVar = {
       date1 : new Date(new Date().getFullYear(), new Date().getMonth(),  new Date().getDate()),
       date2 : new Date(new Date().getFullYear(), new Date().getMonth(),  new Date().getDate()),
       ko:ko,
+      cf_onlineYN:'online',
       loading:false, 
       color:'#008844', 
       gicho:true,  ss:0, gwanliIndex:0, faQuestionCircle, faEdit, faChevronDown, faChevronUp ,faAngleDoubleDown,faAngleDoubleUp,faPrint,faChartBar,faFileExcel,faTrashAlt,
