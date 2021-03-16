@@ -1,16 +1,4 @@
 import {ko} from 'vuejs-datepicker/dist/locale'
-import { faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons'
-import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons'
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import { faPrint } from '@fortawesome/free-solid-svg-icons'
-import { faChartBar } from '@fortawesome/free-solid-svg-icons'
-import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { faCog } from '@fortawesome/free-solid-svg-icons'
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 const customLabels = {
   first: '<<',
   last: '>>',
@@ -34,17 +22,16 @@ var formVar = {
       ko:ko,
       cf_onlineYN:'online',
       loading:false, 
+      customLabels,
       color:'#008844', 
-      gicho:true,  ss:0, gwanliIndex:0, faQuestionCircle, faEdit, faChevronDown, faChevronUp ,faAngleDoubleDown,faAngleDoubleUp,faPrint,faChartBar,faFileExcel,faTrashAlt,
+      onlineyn:true
     } 
   },
   computed:{
     whereIam:{
       get(){
-        return this.$store.state.sisl.konggos.whereIam
       },
       set(val){
-        this.$store.state.sisl.konggos.whereIam = val;
       }
     },
   }

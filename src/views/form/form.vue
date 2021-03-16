@@ -100,31 +100,54 @@ export default {
     FontAwesomeIcon,
   },
   mounted() { //업종 mounted와 updated안하면 dom에서 bootstrap-select로 바인딩이 안됨
-    const $selectpicker = $(this.$el).find('.selectpicker');
-    $selectpicker.selectpicker();
+    // const $selectpicker = $(this.$el).find('.selectpicker');
+    // $selectpicker.selectpicker();
   },
   updated() {
-    $(this.$el).find('.selectpicker').selectpicker('refresh');
+    // $(this.$el).find('.selectpicker').selectpicker('refresh');
   },
   methods:{
     customFormatter(date) {   //datepicker 기본포맷
       return moment(date).format('YYYY/MM/DD');
     },
     async checkform(){
-      const res = await axios.get('https://it-event-back.herokuapp.com/events',
+      const res = await axios.post('https://it-event-back.herokuapp.com/events',
         {
+          "eventCreateType":"INNER",
           "hostEmail":this.hs_email1+"@"+this.hs_email2,
           "hostPhone":this.hs_hp1+this.hs_hp2+this.hs_hp3,
           "title":this.cf_name,
           "eventStartDate":this.date1,
           "eventLastDate":this.date2,
           "eventConceptType":this.cf_cate,
+          "emailSendingMessage":"",
           "location":this.loca,
-          "detailLocation":this.loca,
+          "detailLocation":"",
+          "locationDescription":"",
           "image":this.thumbnail,
-          "contents":this.cf_content,
-          "online":this.cf_onlineYN
+          "onlinePlatformInfo":null,
+          "onlineEnrollInfo":null,
+          "online":this.cf_onlineYN,
+          "emailReserveSending":false
         }
+        // {
+        //   "eventCreateType":"INNER",
+        //   "hostEmail":"uzini_@naver.com",
+        //   "hostPhone":null,
+        //   "title":"이벤트 생성하기 테스트0315_2",
+        //   "eventStartDate":"2021-03-05 00:00:00",
+        //   "eventLastDate":"2021-03-10 00:00:00",
+        //   "eventConceptType":"CLASS",
+        //   "emailSendingMessage":"예약 발송 메시지 테스트 예약 발송 메시지 테스트 예약 발송 메시지 테스트",
+        //   "location":"위치 정보",
+        //   "detailLocation":"위치 지도 정보 내용",
+        //   "locationDescription":"위치 상세 내용입니다.",
+        //   "image":null,
+        //   "onlinePlatformInfo":null,
+        //   "onlineEnrollInfo":null,
+        //   "online":false,
+        //   "emailReserveSending":false
+        // }
       )
       console.log(res);
     }

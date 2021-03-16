@@ -12,22 +12,49 @@
         </div>
         <div>
           <select name="whom" id="whom" v-model="whom">
-            <option value="00">개발자</option>
-            <option value="01">기획자</option>
-            <option value="02">디자이너</option>
+            <option value="00">전체</option>
+            <option value="01">개발자</option>
+            <option value="02">기획자</option>
+            <option value="03">디자이너</option>
           </select>
         </div>
         <div><button type="button" class="searchBtn"></button>FIND</div>
       </div>
     </div>
-    <div class="list"></div>
+    <div class="list">
+      <div v-for="(i,list) in lists" :key="list.idx">
+        <div>{{list.nickname}}</div>
+        <div>{{list.height}}</div>
+      </div>
+    </div>
   </div>
   
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-
+  data(){
+    return{
+      onlineyn:'00',
+      whom:'00',
+      lists:[]
+    }
+  },
+  created(){
+    this.callList();
+  },
+  methods:{
+    async callList(){
+      try{
+        const res = await axios.get('https://it-event-back.herokuapp.com?id=1')
+        this.lists = res.data;
+        console.log(this.lists)
+      }catch(e){
+        console.log(e);
+      }
+    }
+  }
 }
 </script>
 
