@@ -95,6 +95,8 @@ export default {
     async callList(){
       try{
         const res = await axios.get('https://it-event-back.herokuapp.com/events')
+        console.log(res.data.data.events);
+        this.lists = res.data.data.events;
       }catch(e){
         console.log(e);
       }
@@ -157,11 +159,11 @@ background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
   width:236px;
   border:1px solid #dae1e6;
   border-radius: 4px;
-  margin:0 40px;
+  margin:0 0 0 40px;
   cursor:pointer;
 }
 .listArea{
-  margin:50px auto 0 auto;
+  margin:40px auto 0 auto;
   display: inline-block;
 }
 .listTitle{
@@ -170,13 +172,14 @@ background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin:0 40px;
+  margin:0 0 0 40px;
   cursor:pointer;
+  font-weight:bold;
 }
 .listDate{
   width:236px;
   text-align: left;
-  margin:10px 40px 0 40px;
+  margin:10px 0 0 40px;
   cursor:pointer;
 }
 .listDate span{

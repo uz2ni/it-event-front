@@ -1,7 +1,9 @@
 <template>
   <div class="nav">
     <div class="headerLeft" >
-      <router-link to="main" tag="li"></router-link>
+      <router-link to="main" tag="li">
+        <img src="../assets/blacklogo.png" alt="BASS CLEF">
+      </router-link>
     </div>
     <div class="headerRight">
       <router-link tag="li" to="main"><li>홈</li></router-link>
@@ -47,14 +49,14 @@ export default {
   text-align:right;
 }
 .headerLeft{
-  color: fff;
+  color: #ffffff;
   float:left;
   padding: 5px 8px 0 5px;
   
 }
 .headerLeft img{
   margin-top:-18px;
-  margin-left: 40px;
+  width:220px;
 }
 .headerLeft li{
   margin-right:3px;
@@ -70,9 +72,9 @@ export default {
   cursor: pointer;
 }
 .headerRight{
-  color: fff;
+  color: #ffffff;
   float:right;
-  padding: 5px 20px 0 20px;
+  padding: 5px 20px 0 0px;
 }
 .headerRight .router-link-exact-active{
   color: #40E0D0;

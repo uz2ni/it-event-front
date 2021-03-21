@@ -6,6 +6,8 @@ import free from '../components/free.vue';
 import magam from '../components/magam.vue';
 import mogakco from '../components/mogakco.vue';
 import enroll from '../views/form/form.vue';
+import login from '../views/login/login.vue';
+
 Vue.use(VueRouter);
 
 export const router = new VueRouter({
@@ -38,6 +40,10 @@ export const router = new VueRouter({
     {
       path:'/enroll',
       component:enroll,
+    },
+    {
+      path:'/login',
+      component:login,
     }
   ]
 });
